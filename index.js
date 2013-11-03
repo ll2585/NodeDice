@@ -57,8 +57,11 @@ function setCurRoomAndCurTable(gameType, id){
 
 var express = require("express");
 var MongoStore = require('connect-mongo')(express);
+var mongoUri = process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  'mongodb://localhost/test';
 var sessionStore = new MongoStore({
-  url: 'mongodb://localhost/test'
+  url: mongoUri
 });
 var cookieParser = express.cookieParser('your secret sauce');
 
@@ -89,7 +92,7 @@ app.configure(function () {
   app.use(express.static(__dirname + '/public'));
 
   app.use(express.bodyParser());
-  
+
 });
 
 var io = require('socket.io').listen(app.listen(port));
