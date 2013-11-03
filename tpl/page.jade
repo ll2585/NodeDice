@@ -1,0 +1,58 @@
+!!!
+html
+    head
+        title= "Real time web chat"
+        script(src='/socket.io/socket.io.js')
+        script(src='http://code.jquery.com/jquery-1.10.1.min.js')
+        script(src='/chat.js')
+        if(game == 'dice')
+            script(src='/dice.js')
+        else
+            script(src='/cards.js')
+        link(rel='stylesheet', href='/css/lib/bootstrap.css')
+        link(rel='stylesheet', href='/css/lib/bootstrap-responsive.css')
+        link(rel='stylesheet', href='/css/main.css')
+        link(rel='stylesheet', href='/css/chat.css')
+    body
+        div#nav
+            b
+                div.playerID(id=player.id)
+                    |#{player.name}
+            |THE CURRENT GAME ID IS 
+            div#gameid #{id}
+            |THE CURRENT GAME IS 
+            div#gameid #{game}
+        div#body
+            div.container
+                div.row-fluid
+                    div.span7.pull-down
+                        div#chatlog(style='height: 100px; margin: 0 0 20px 0; border: solid 1px #999; overflow-y: scroll;')
+                        div#roll1(style = 'display: inline')
+                        div#roll2(style = 'display: inline')
+                        br
+                        input#rr1(type='button', value='Reroll Dice 1')
+                        input#rr2(type='button', value='Reroll Dice 2')
+                        input#end(type='button', value='End Turn')
+                    div.span2.pull-down.scoreboard
+                        table.table.table-bordered.table-hover.table-condensed.scoreboard-table
+                            caption SCOREBOARD
+                            thead
+                                tr
+                                    th Player
+                                    th Score
+                            tbody.players
+                    div.span3.pull-down
+                        div#chatbox
+                            div#content(style='height: 300px; margin: 0 0 20px 0; border: solid 1px #999; overflow-y: scroll;')
+                            input#field(style = ' margin: 0;')
+                            input#send(type='button', value='send')             
+        div.controls
+            | Name: 
+            div#name(style = 'display: inline')
+                |#{player.name}
+            br
+            input#ready(type='button', value='ready')
+            input#start(type='button', value='start')
+            p#opponents
+            p#cards
+            p#pack
