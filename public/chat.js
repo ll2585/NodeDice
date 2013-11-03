@@ -12,7 +12,7 @@ function getUrlVars()
     return vars;
 }
 
-var socket = io.connect('http://localhost:3700');
+var socket = io.connect(window.location.hostname);
 
     function sendChatMessageOnEnter(myMessage, sendButton){
         myMessage.keyup(function(event){
